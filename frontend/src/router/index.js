@@ -14,10 +14,30 @@ const routes = [
     name: 'trainer',
     component: () => import('../components/Trainer/Index.vue')
   },
+  // {
+  //   path: '/pitch',
+  //   name: 'pitch',
+  //   component: () => import('../components/Pitch/PitchTrainer.vue')
+  // },
+  {
+    path: '/exercises',
+    name: 'exercises',
+    component: () => import('../pages/Exercises.vue')
+  },
   {
     path: '/pitch',
-    name: 'pitch',
-    component: () => import('../components/Pitch/PitchTrainer.vue')
+    name: 'pitch-training',
+    component: () => import('../components/Exercises/PitchTraining.vue')
+  },
+  {
+    path: '/intervals',
+    name: 'interval-training',
+    component: () => import('../components/Exercises/IntervalTraining.vue')
+  },
+  {
+    path: '/training',
+    name: 'training',
+    component: () => import('../pages/ExercisePage.vue')
   },
 ]
 

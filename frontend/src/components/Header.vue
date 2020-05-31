@@ -13,10 +13,19 @@
       <v-btn
         text
         dark
-        :to="{name: 'pitch'}">
-        Pitch Trainer
+        :to="{name: 'exercises'}">
+        Exercises
       </v-btn>
     </v-toolbar-items>
+
+    <!-- <v-toolbar-items>
+      <v-btn
+        text
+        dark
+        :to="{name: 'active-exercises'}">
+        Active Exercises
+      </v-btn>
+    </v-toolbar-items> -->
 
     <v-spacer />
 

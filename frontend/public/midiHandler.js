@@ -1,3 +1,20 @@
+// HELPER FUNCTIONS
+
+function convertToBigInt(note, octave) {
+    var returnedInt = 0;
+
+    if (typeof(note) == 'number') {
+        returnedInt = 24 + note + octave * 12;
+    } else {
+        returnedInt = 24 + noteArray.indexOf(note) + octave * 12;
+    }
+
+    return returnedInt;
+}
+
+
+// console.log("midi handler");
+
 // Initialization
 
 // C = 0
@@ -12,6 +29,21 @@
 // A = 9
 // A# = 10
 // B = 11
+
+// // C major
+// 0, 4, 7
+// // D minor
+// 2, 5, 9
+// // E minor
+// 4, 7, 11
+// // F major
+// 5, 9, 0
+// // G major
+// 7, 11, 2
+// // A minor
+// 9, 0, 4
+// // B dim
+// 11, 2, 5
 
 var noteArray = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 var noteArray2 = ['C', 'Cs', 'D', 'Ds', 'E', 'F', 'Fs', 'G', 'Gs', 'A', 'As', 'B'];
@@ -128,9 +160,6 @@ function setCurrentKey(key) {
         currentKeyChords = chordsByMinorKey[currentKey];
         currentKeyNotes = notesByMinorKey[currentKey];
     }
-
-    console.log(currentKeyChords);
-    console.log(currentKeyNotes);
 }
 
 function setCurrentMode(mode) {
@@ -144,33 +173,7 @@ function setCurrentMode(mode) {
         currentKeyChords = chordsByMinorKey[currentKey];
         currentKeyNotes = notesByMinorKey[currentKey];
     }
-    console.log(currentKeyChords);
-    console.log(currentKeyNotes);
 }
-
-// Get This Stuff
-
-// // C major
-// 0, 4, 7
-
-// // D minor
-// 2, 5, 9
-
-// // E minor
-// 4, 7, 11
-
-// // F major
-// 5, 9, 0
-
-// // G major
-// 7, 11, 2
-
-// // A minor
-// 9, 0, 4
-
-// // B dim
-// 11, 2, 5
-
 
 // Request MIDI access
 if (navigator.requestMIDIAccess) {
@@ -222,8 +225,6 @@ var activeChord = [];
 
 var isCorrect = false;
 
-
-
 console.log("chord library");
 console.log(chordLibrary);
 
@@ -264,18 +265,6 @@ function noteOn(note) {
     var noteMod = note % 12;
 
     activeChord.push(note);
-
-    // $('#pkey-' + noteArray2[noteMod]).addClass("active");
-
-    // TODO: AND GAMETYPE = ____
-    if (noteMod == 0) {
-        $('#noteBtnC').trigger('click');
-    } else if (noteMod == 7) {
-        $('#noteBtnG').trigger('click');
-    } 
-    // else {
-    //     $('#noteBtnOther').trigger('click');
-    // }
 
     $('#userAnswer').html(noteArray[noteMod].toString());
 
@@ -339,52 +328,62 @@ function noteOff(note) {
     $('#pkey-' + note).removeClass("active");
 }
 
-// This function will trigger certain animations and advance gameplay 
-// when certain criterion are identified by the noteOn/noteOff listeners
-// For instance, a lock is unlocked, the timer expires, etc.
-function runSequence(sequence) {
-	console.log("runSequence", sequence);
+// SECTION: GAME
+
+// GAME VARIABLES
+var gameType;
+var correctAnswer = 0;
+var activeOptions;
+
+// GAME FUNCTIONS
+function setActiveOptions(options) {
+    if (options == null) {
+        activeOptions = currentKeyNotes;
+    } else {
+        // do function, pick between options and currentKeyNotes, make sure they match u know?
+    }
 }
 
-// MIDI HANDLER!
+function getRandomItem(items) {
+    return items[Math.floor(Math.random()*items.length)];
+}
 
-// if (navigator.requestMIDIAccess) {
-// 	console.log('This browser supports WebMIDI!');
-// } else {
-// 	console.log('WebMIDI is not supported in this browser.');
-// }
+function initializeGame(description) {
+    gameType = description;
+    // setActiveOptions();
+    activeOptions = currentKeyNotes;
 
-// navigator.requestMIDIAccess()
-//     .then(onMIDISuccess, onMIDIFailure);
+    var optionsArray = activeOptions;
+    var randomItem = getRandomItem(optionsArray);
 
-// function onMIDIFailure() {
-//     console.log('Could not access your MIDI devices.');
-// }
+    // Sets the first answer when initializing game
+    correctAnswer = randomItem;
 
-// function onMIDISuccess(midiAccess) {
-// 	console.log(midiAccess);
-// 	for (var input of midiAccess.inputs.values()) {
-// 		input.onmidimessage = getMIDIMessage;
-// 	}
-// }
+    // Make function for this
+    var optionsConverted = [];
+    for (var item in optionsArray) {
+        optionsConverted.push(noteArray2[optionsArray[item]]);
+    }
 
-// function getMIDIMessage(message) {
-// 	console.log(message);
-// 	var command = message.data[0];
-// 	var note = message.data[1];
-// 	var velocity = (message.data.length > 2) ? message.data[2] : 0; // a velocity value might not be included with a noteOff command
+    return [optionsConverted, correctAnswer];
+    // return randomItem;
+}
 
-// 	switch (command) {
-// 	case 144: // noteOn
-// 		if (velocity > 0) {
-// 			noteOn(note, velocity);
-// 		} else {
-// 			noteOff(note);
-// 		}
-// 		break;
-// 	case 128: // noteOff
-// 		noteOff(note);
-// 		break;
-// 		// we could easily expand this switch statement to cover other types of commands such as controllers or sysex
-// 	}
-// }
+function processAnswer(answer) {
+    if (answer == correctAnswer) return true;
+    else return false;
+}
+
+// SECTION: AUDIO
+
+// AUDIO VARIABLES
+
+// AUDIO FUNCTIONS
+function playAudioFile(number, note) {
+    try {
+        var audio = new Audio('./wav/Piano_' + number + ' ' + noteArray2[note] + '.wav');
+        audio.play();
+    } catch (e) {
+        console.log(e);
+    }
+}

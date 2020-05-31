@@ -55,7 +55,7 @@
     </v-row>
 
     <v-row>
-        <piano />
+      <piano />
     </v-row>
 
           <!-- <v-col cols="3">

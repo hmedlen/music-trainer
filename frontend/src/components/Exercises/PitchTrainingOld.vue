@@ -7,12 +7,12 @@
       <v-col cols="12" sm="3" />
         <v-col cols="12" sm="6">
           <pitch-card :note="note" />
-        <v-col cols="12" sm="3" />
-      </v-col>
+        </v-col>
+      <v-col cols="12" sm="3" />
     </v-row>
 
     <v-row>
-        <piano />
+      <piano />
     </v-row>
   </div>
 </template>

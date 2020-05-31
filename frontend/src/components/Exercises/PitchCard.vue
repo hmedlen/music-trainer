@@ -41,10 +41,6 @@
         <span class="last-note">
             {{ feedback }} {{ lastNote }} {{ lastOctave }}
         </span>
-        <!-- <v-spacer />
-        <span>
-          You said: {{ userAnswer }}
-        </span> -->
       </v-col>
     </v-row>
 
@@ -199,10 +195,10 @@ export default {
   padding-bottom: 50px;
 }
 
-.card-actions {
-  /* position: absolute;
-  bottom: 0; */
-}
+/* .card-actions {
+  position: absolute;
+  bottom: 0;
+} */
 
 .last-note {
   font-size: 30px;
