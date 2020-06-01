@@ -19,13 +19,14 @@ export default {
   },
   data () {
     return {
+      sound: 'Harp',
       note: 0,
       octave: 3
     }
   },
   methods: {
     playSound () {
-      playAudioFile(this.octave, this.note);
+      playAudioFile(this.octave, this.note, this.sound);
     }
   },
   mounted () {

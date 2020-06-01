@@ -28,9 +28,9 @@ export default {
 <style scoped>
 .exerciseContainer {
   background-color: white;
-  width: 600px;
-  height: 300px;
-  margin: 0px auto 10px auto;
+  width: 800px;
+  height: 320px;
+  margin: 10px auto 30px auto;
   padding: 10px;
 }
 </style>

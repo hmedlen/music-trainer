@@ -1,16 +1,3 @@
-// HELPER FUNCTIONS
-
-function convertToBigInt(note, octave) {
-    var returnedInt = 0;
-
-    if (typeof(note) == 'number') {
-        returnedInt = 24 + note + octave * 12;
-    } else {
-        returnedInt = 24 + noteArray.indexOf(note) + octave * 12;
-    }
-
-    return returnedInt;
-}
 
 
 // console.log("midi handler");
@@ -53,6 +40,21 @@ var romanNumeralsMinor = ['i', 'ii dim', 'III', 'iv', 'v', 'VI', 'VII'];
 
 var notesInMajorKey = {};
 var notesInMinorKey = {};
+
+// HELPER FUNCTIONS
+
+function convertToBigInt(note, octave) {
+    var returnedInt = 0;
+
+    if (typeof(note) == 'number') {
+        returnedInt = 24 + note + octave * 12;
+    } else {
+        returnedInt = 24 + noteArray2.indexOf(note) + octave * 12;
+    }
+
+    return returnedInt;
+}
+
 
 for (var i=0; i < 12; i++) {
     let notesInC = [0, 2, 4, 5, 7, 9, 11];
@@ -144,10 +146,10 @@ for (var i=0; i < 12; i++) {
 }
 
 // Global Variables
-var currentKey = 0;
-var currentMode = "major"
-var currentKeyChords = chordsByMajorKey[0];
-var currentKeyNotes = notesByMajorKey[0];
+var currentKey = 8;
+var currentMode = "minor"
+var currentKeyChords = chordsByMajorKey[currentKey];
+var currentKeyNotes = notesByMajorKey[currentKey];
 
 function setCurrentKey(key) {
     currentKey = key;
@@ -349,9 +351,21 @@ function getRandomItem(items) {
 }
 
 function initializeGame(description) {
+    setCurrentKey(0);
+    setCurrentMode("major");
     gameType = description;
     // setActiveOptions();
+
     activeOptions = currentKeyNotes;
+    activeOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+
+    // how to handle the activeOptions in a better way:
+    // if getting notes in the key of C octave 3 for example, do it by midi note number
+    // so, potential notes that could be played would be: 60 (if this is middle c), + each item in array
+    // like 60 + 0, 60 + 2, 60 + 4, 60 + 5, 60 + 7... etc... 
+    // I could then create an array of these... like, say it spans 3 octaves TOTAL, but I only want a potential 2 octaves to be played, with random starting point
+    // then for the new options array, I could select the next 14 items starting at a random position 0-6
+    // activeOptions might still stay the same for pitch game, because I don't want to use octaves in the answers
 
     var optionsArray = activeOptions;
     var randomItem = getRandomItem(optionsArray);
@@ -379,11 +393,120 @@ function processAnswer(answer) {
 // AUDIO VARIABLES
 
 // AUDIO FUNCTIONS
-function playAudioFile(number, note) {
+function playAudioFile(number, note, sound) {
+    var soundsArray = ["Piano", "Harp", "SynthBrass"];
+    var extension = '.wav';
+    if (sound == "random") {
+        sound = getRandomItem(soundsArray);
+    }
+
+    if (sound == "Harp" || sound == "SynthBrass") extension = '.mp3';
+
+    // for fun
+    var octaveOptions = [2, 3, 4, 5];
+    number = getRandomItem(octaveOptions);
+
     try {
-        var audio = new Audio('./wav/Piano_' + number + ' ' + noteArray2[note] + '.wav');
+        console.log(sound + '_' + number + ' ' + noteArray2[note] + extension);
+        // var audio = new Audio('./wav/Piano_' + number + ' ' + noteArray2[note] + '.wav');
+        var audio = new Audio('./wav/' + sound + '_' + number + ' ' + noteArray2[note] + extension);
         audio.play();
     } catch (e) {
         console.log(e);
     }
 }
+
+function playAudioFile2(number, note, sound, flag) {
+    var soundsArray = ["Piano", "Harp", "SynthBrass"];
+    var extension = '.wav';
+    if (sound == "random") {
+        sound = getRandomItem(soundsArray);
+    }
+
+    if (sound == "Harp" || sound == "SynthBrass") extension = '.mp3';
+
+    // for fun
+
+    // var octaveOptions = [2, 3, 4, 5];
+    // number = getRandomItem(octaveOptions);
+
+    var octaveOptions = [2, 3, 4, 5];
+    octaveOptions = [3];
+
+    // Better way of doing this: number must be at least ____ semitones away from previous choice
+
+    // if (flag == true) {
+    //     octaveOptions = [2];
+    // } else {
+    //     octaveOptions = [3];
+    // }
+
+    number = getRandomItem(octaveOptions);
+
+    try {
+        console.log(sound + '_' + number + ' ' + noteArray2[note] + extension);
+        // var audio = new Audio('./wav/Piano_' + number + ' ' + noteArray2[note] + '.wav');
+        var audio = new Audio('./wav/' + sound + '_' + number + ' ' + noteArray2[note] + extension);
+        audio.play();
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+var untilFlag = false;
+function playAudioUntil(octave, note, sound, flag) {
+    untilFlag = true;
+    var soundsArray = ["Piano", "Harp", "SynthBrass"];
+    var extension = '.wav';
+    if (sound == "random") {
+        sound = getRandomItem(soundsArray);
+    }
+
+    if (sound == "Harp" || sound == "SynthBrass") extension = '.mp3';
+
+    var octaveOptions = [2, 3, 4, 5];
+    
+    if (flag == true) {
+        octaveOptions = [2, 3];
+    } else {
+        octaveOptions = [4, 5];
+    }
+
+    octave = getRandomItem(octaveOptions);
+
+    // while (untilFlag) {
+    //     setTimeout(() => { }, 200);
+    // }
+
+    var funcfunc = function() {
+        
+    }
+
+    
+    // untilFlag = true;
+}
+
+function playAudio3(octave, note, sound, flag) {
+    var soundsArray = ["Piano", "Harp", "SynthBrass"];
+    var extension = '.wav';
+    if (sound == "random") {
+        sound = getRandomItem(soundsArray);
+    }
+
+    if (sound == "Harp" || sound == "SynthBrass") extension = '.mp3';
+
+    var octaveOptions = [2, 3, 4, 5];
+
+    if (flag == true) {
+        octaveOptions = [2, 3];
+    } else {
+        octaveOptions = [4, 5];
+    }
+
+    octave = getRandomItem(octaveOptions);
+
+    var audio = new Audio('./wav/' + sound + '_' + octave + ' ' + noteArray2[note] + extension);
+    audio.play(); 
+}
+
+// setInterval(playAudio3(3, 'C', 'Piano'), 500);

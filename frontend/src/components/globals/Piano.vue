@@ -2,78 +2,78 @@
   <div style="margin:auto">
     <ul class="set">
       <!-- <li class="whitekey b" id="p-key-B"></li>
-      <li class="black as" id="p-key-As"></li>
+      <li class="blackkey as" id="p-key-As"></li>
       <li class="whitekey a"></li>
-      <li class="black gs"></li>
+      <li class="blackkey gs"></li>
       <li class="whitekey g"></li>
-      <li class="black fs"></li>
+      <li class="blackkey fs"></li>
       <li class="whitekey f"></li>
       <li class="whitekey e"></li>
-      <li class="black ds"></li>
+      <li class="blackkey ds"></li>
       <li class="whitekey d"></li>
-      <li class="black cs"></li>
+      <li class="blackkey cs"></li>
       <li class="whitekey c"></li> -->
 
       <!-- <li class="whitekey c" id="pkey-C"></li>
-      <li class="black cs" id="pkey-Cs"></li>
+      <li class="blackkey cs" id="pkey-Cs"></li>
       <li class="whitekey d" id="pkey-D"></li>
-      <li class="black ds" id="pkey-Ds"></li>
+      <li class="blackkey ds" id="pkey-Ds"></li>
       <li class="whitekey e" id="pkey-E"></li>
       <li class="whitekey f" id="pkey-F"></li>
-      <li class="black fs" id="pkey-Fs"></li>
+      <li class="blackkey fs" id="pkey-Fs"></li>
       <li class="whitekey g" id="pkey-G"></li>
-      <li class="black gs" id="pkey-Gs"></li>
+      <li class="blackkey gs" id="pkey-Gs"></li>
       <li class="whitekey a" id="pkey-A"></li>
-      <li class="black as" id="pkey-As"></li>
+      <li class="blackkey as" id="pkey-As"></li>
       <li class="whitekey b" id="pkey-B"></li> -->
 
       <li class="whitekey c" id="pkey-36"></li>
-      <li class="black cs" id="pkey-37"></li>
+      <li class="blackkey cs" id="pkey-37"></li>
       <li class="whitekey d" id="pkey-38"></li>
-      <li class="black ds" id="pkey-39"></li>
+      <li class="blackkey ds" id="pkey-39"></li>
       <li class="whitekey e" id="pkey-40"></li>
       <li class="whitekey f" id="pkey-41"></li>
-      <li class="black fs" id="pkey-42"></li>
+      <li class="blackkey fs" id="pkey-42"></li>
       <li class="whitekey g" id="pkey-43"></li>
-      <li class="black gs" id="pkey-44"></li>
+      <li class="blackkey gs" id="pkey-44"></li>
       <li class="whitekey a" id="pkey-45"></li>
-      <li class="black as" id="pkey-46"></li>
+      <li class="blackkey as" id="pkey-46"></li>
       <li class="whitekey b" id="pkey-47"></li>
       <li class="whitekey c" id="pkey-48"></li>
-      <li class="black cs" id="pkey-49"></li>
+      <li class="blackkey cs" id="pkey-49"></li>
       <li class="whitekey d" id="pkey-50"></li>
-      <li class="black ds" id="pkey-51"></li>
+      <li class="blackkey ds" id="pkey-51"></li>
       <li class="whitekey e" id="pkey-52"></li>
       <li class="whitekey f" id="pkey-53"></li>
-      <li class="black fs" id="pkey-54"></li>
+      <li class="blackkey fs" id="pkey-54"></li>
       <li class="whitekey g" id="pkey-55"></li>
-      <li class="black gs" id="pkey-56"></li>
+      <li class="blackkey gs" id="pkey-56"></li>
       <li class="whitekey a" id="pkey-57"></li>
-      <li class="black as" id="pkey-58"></li>
+      <li class="blackkey as" id="pkey-58"></li>
       <li class="whitekey b" id="pkey-59"></li>
       <li class="whitekey c" id="pkey-60"></li>
-      <li class="black cs" id="pkey-61"></li>
+      <li class="blackkey cs" id="pkey-61"></li>
       <li class="whitekey d" id="pkey-62"></li>
-      <li class="black ds" id="pkey-63"></li>
+      <li class="blackkey ds" id="pkey-63"></li>
       <li class="whitekey e" id="pkey-64"></li>
       <li class="whitekey f" id="pkey-65"></li>
-      <li class="black fs" id="pkey-66"></li>
+      <li class="blackkey fs" id="pkey-66"></li>
       <li class="whitekey g" id="pkey-67"></li>
-      <li class="black gs" id="pkey-68"></li>
+      <li class="blackkey gs" id="pkey-68"></li>
       <li class="whitekey a" id="pkey-69"></li>
-      <li class="black as" id="pkey-70"></li>
+      <li class="blackkey as" id="pkey-70"></li>
       <li class="whitekey b" id="pkey-71"></li>
       <li class="whitekey c" id="pkey-72"></li>
-      <li class="black cs" id="pkey-73"></li>
+      <li class="blackkey cs" id="pkey-73"></li>
       <li class="whitekey d" id="pkey-74"></li>
-      <li class="black ds" id="pkey-75"></li>
+      <li class="blackkey ds" id="pkey-75"></li>
       <li class="whitekey e" id="pkey-76"></li>
       <li class="whitekey f" id="pkey-77"></li>
-      <li class="black fs" id="pkey-78"></li>
+      <li class="blackkey fs" id="pkey-78"></li>
       <li class="whitekey g" id="pkey-79"></li>
-      <li class="black gs" id="pkey-80"></li>
+      <li class="blackkey gs" id="pkey-80"></li>
       <li class="whitekey a" id="pkey-81"></li>
-      <li class="black as" id="pkey-82"></li>
+      <li class="blackkey as" id="pkey-82"></li>
       <li class="whitekey b" id="pkey-83"></li>
       <li class="whitekey c" id="pkey-84"></li>
     </ul>
@@ -144,7 +144,7 @@ ul .whitekey:active {
   background:linear-gradient(to bottom,#fff 0%,#e9e9e9 100%)
 }
 
-ul .black {
+ul .blackkey {
   height:6em;
   width:1.5em;
   margin:0 0 0 -.75em;
@@ -155,12 +155,12 @@ ul .black {
   background:linear-gradient(45deg,#222 0%,#555 100%)
 }
 
-ul .black.active {
+ul .blackkey.active {
   box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -2px 2px 3px rgba(0,0,0,0.6) inset,0 1px 2px rgba(0,0,0,0.5);
   background:linear-gradient(to right,#444 0%,#222 100%)
 }
 
-ul .black:active {
+ul .blackkey:active {
   box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -2px 2px 3px rgba(0,0,0,0.6) inset,0 1px 2px rgba(0,0,0,0.5);
   background:linear-gradient(to right,#444 0%,#222 100%)
 }
@@ -223,7 +223,7 @@ ul .whitekey:active {
   background:linear-gradient(to bottom,#fff 0%,#e9e9e9 100%)
 }
 
-ul .black {
+ul .blackkey {
   height:8em;
   width:2em;
   margin:0 0 0 -1em;
@@ -234,12 +234,12 @@ ul .black {
   background:linear-gradient(45deg,#222 0%,#555 100%)
 }
 
-ul .black.active {
+ul .blackkey.active {
   box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -2px 2px 3px rgba(0,0,0,0.6) inset,0 1px 2px rgba(0,0,0,0.5);
   background:linear-gradient(to right,#444 0%,#222 100%)
 }
 
-ul .black:active {
+ul .blackkey:active {
   box-shadow:-1px -1px 2px rgba(255,255,255,0.2) inset,0 -2px 2px 3px rgba(0,0,0,0.6) inset,0 1px 2px rgba(0,0,0,0.5);
   background:linear-gradient(to right,#444 0%,#222 100%)
 }

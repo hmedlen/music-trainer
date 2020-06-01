@@ -1,5 +1,13 @@
 <template>
   <div>
+      <div class="score">
+        {{ correct }} / {{ total }}
+      </div>
+      <div>
+        {{ correctRatio }}%
+      </div>
+
+      <div style="marginTop:60px" />
       <v-btn
         large
         dark
@@ -8,13 +16,9 @@
         <v-icon>mdi-volume-high</v-icon>
       </v-btn>
 
-      <div class="score">
-        {{ correct }} / {{ total }}
-      </div>
-
       <div class="answerChoices">
         <v-btn fab text class="answerBtns" v-for="item in activeChoices" :id="item" :key="item" @click="onAnswerClick(item)">
-          {{ item }}
+          {{ item | fixSharps }}
         </v-btn>
       </div>
   </div>
@@ -29,22 +33,26 @@ export default {
   },
   data () {
     return {
+      sound: 'SynthBrass',
       note: 0,
       noteBig: 0,
       octave: 3,
       activeChoices: [],
+      flag: false,
       correct: 0,
-      total: 0
+      total: 0,
+      correctRatio: 0
     }
   },
   methods: {
     onAnswerClick (answer) {
       this.total += 1;
-      var answerConverted = noteArray.indexOf(answer);
+      var answerConverted = noteArray2.indexOf(answer);
       var isCorrect = processAnswer(answerConverted);
 
       if (isCorrect) {
         this.correct += 1;
+        untilFlag = false;
         playCorrectAnswer();
         $("#" + answer).addClass("correct");
 
@@ -56,6 +64,9 @@ export default {
       } else {
         $("#" + answer).addClass("incorrect");
       }
+
+      this.correctRatio = ((this.correct / this.total) * 100).toFixed(1)
+      // var discount = (price / listprice).toFixed(2);
     },
 
     nextStep () {
@@ -64,9 +75,15 @@ export default {
       }
 
       let randomItem = getRandomItem(activeOptions);
-      let randomOctave = getRandomItem([2,3]);
-      setTimeout(() => { this.note = randomItem; correctAnswer = randomItem; this.octave = randomOctave;}, 1300);
-      setTimeout(() => { playAudioFile(this.octave, this.note); this.resetChoices(); }, 1500); 
+      let randomOctave = getRandomItem([3]);
+      setTimeout(() => { this.note = randomItem; correctAnswer = randomItem; this.octave = randomOctave; this.flag = !this.flag}, 1400);
+      // setTimeout(()=> { this.resetChoices(); }, 1400);
+      setTimeout(() => { this.playSound(); this.resetChoices(); }, 1500);
+
+      // console.log("??");
+      // setInterval(this.playSound(), 100);
+      // setTimeout(() => { playAudioFile2(this.octave, this.note, this.sound, this.flag); this.resetChoices(); }, 1000);
+      // TODO: change parameter of playAudioFile to an object, where it resolves the current step yknow?
     },
 
     resetChoices() {
@@ -80,13 +97,18 @@ export default {
     },
 
     playSound () {
-      playAudioFile(this.octave, this.note);
+      playAudioFile2(this.octave, this.note, this.sound, this.flag);
     }
   },
   mounted () {
     let initGameSettings = initializeGame('PitchTraining');
     this.activeChoices = initGameSettings[0];
     this.note = initGameSettings[1];
+  },
+  filters: {
+    fixSharps: function (value) {
+      return value.replace("s", "#");
+    }
   }
 }
 </script>
@@ -94,12 +116,12 @@ export default {
 <style scoped>
 
 .score {
-  padding-top: 20px;
-  font-size: 18px;
+  padding-top: 40px;
+  font-size: 30px;
 }
 
 .answerChoices {
-  padding-top: 20px;
+  padding-top: 30px;
 }
 
 .answerBtns {
