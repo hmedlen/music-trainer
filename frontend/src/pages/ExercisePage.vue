@@ -13,7 +13,7 @@
 import Piano from '../components/globals/Piano'
 
 export default {
-  data: () => ({compName: 'PitchTraining'}),
+  data: () => ({compName: 'ChordTraining'}),
   components: {
     Piano
   },

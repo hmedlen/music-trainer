@@ -260,6 +260,21 @@ function manageChordHistory(key) {
     }
 }
 
+function chordIsPlayed() {
+    console.log("chordIsPlayed");
+    console.log(activeChord);
+    // if (activeChord)
+    var theChord = activeChord;
+    for (var i=0; i < theChord.length; i++) {
+        theChord[i] = theChord[i] % 12;
+    }
+
+    console.log(theChord);
+
+
+    
+}
+
 // Function to handle noteOn messages (ie. key is pressed)
 // Think of this like an 'onkeydown' event
 function noteOn(note) {
@@ -280,6 +295,7 @@ function noteOn(note) {
 
     // Show Current Chord
     if (activeChord.length > 2) {
+        chordIsPlayed();
         // console.log("ok");
         // var chord = "";
         var match = false;
@@ -291,6 +307,8 @@ function noteOn(note) {
                         match = true;
                         chordHistory.unshift(key);
                         manageChordHistory(key);
+                        console.log(key);
+                        $('#' + key).click();
                     }
                 } else {
                     break;
@@ -359,6 +377,12 @@ function initializeGame(description) {
     activeOptions = currentKeyNotes;
     // activeOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
+    console.log(chordLibrary);
+    if (description == "ChordTraining") {
+        activeOptions = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "Cmin", "C#min", "Dmin", "D#min", "Emin", "Fmin", "F#min", "Gmin", "G#min", "Amin", "A#min", "Bmin"];
+    }
+
+
     // how to handle the activeOptions in a better way:
     // if getting notes in the key of C octave 3 for example, do it by midi note number
     // so, potential notes that could be played would be: 60 (if this is middle c), + each item in array
@@ -376,7 +400,11 @@ function initializeGame(description) {
     // Make function for this
     var optionsConverted = [];
     for (var item in optionsArray) {
-        optionsConverted.push(noteArray2[optionsArray[item]]);
+        if (description == "ChordTraining") {
+            optionsConverted = activeOptions;
+        } else {
+            optionsConverted.push(noteArray2[optionsArray[item]]);
+        }
     }
 
     return [optionsConverted, correctAnswer];
