@@ -351,13 +351,13 @@ function getRandomItem(items) {
 }
 
 function initializeGame(description) {
-    setCurrentKey(0);
-    setCurrentMode("major");
+    setCurrentKey(7);
+    setCurrentMode("minor   ");
     gameType = description;
     // setActiveOptions();
 
     activeOptions = currentKeyNotes;
-    activeOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    // activeOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
     // how to handle the activeOptions in a better way:
     // if getting notes in the key of C octave 3 for example, do it by midi note number
