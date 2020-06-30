@@ -9,8 +9,20 @@
 
       <div style="marginTop:60px" />
       <div style="fontSize:40px; fontWeight:700;">
-        {{ correctAnswer }}
+        {{ correctAnswer | fixSharps }} 
+        <!-- {{ theIndex }} -->
       </div>
+
+      <div>
+        <v-btn fab text large id="incorrectBtn">
+          Incorrect
+        </v-btn>
+        <span style="width:100px">....................</span>
+        <v-btn fab text large id="correctBtn">
+          Correct
+        </v-btn>
+      </div>
+
       <!-- <v-btn
         large
         dark
@@ -18,6 +30,7 @@
       >
         <v-icon>mdi-volume-high</v-icon>
       </v-btn> -->
+
 
       <div class="answerChoices">
         <v-btn fab text class="answerBtns" v-for="item in activeChoices" :id="item" :key="item" @click="onAnswerClick(item)">
@@ -37,18 +50,20 @@ export default {
   data () {
     return {
       sound: 'Piano',
-      correctAnswer: 0,
+      correctAnswer: 'C',
       noteBig: 0,
       octave: 3,
       activeChoices: [],
       flag: false,
       correct: 0,
       total: 0,
-      correctRatio: 0
+      correctRatio: 0,
+      theIndex: "i"
     }
   },
   methods: {
     onAnswerClick (answer) {
+      if (this.flag) return;
       console.log("clicked");
       console.log(answer);
 
@@ -62,7 +77,8 @@ export default {
         this.correct += 1;
         untilFlag = false;
         playCorrectAnswer();
-        $("#" + answer).addClass("correct");
+        // $("#" + answer).addClass("correct");
+        $("#correctBtn").addClass("correct");
 
         // this.noteBig = convertToBigInt(answer, this.octave);
 
@@ -71,22 +87,25 @@ export default {
         this.nextStep();
       } else {
         console.log("WRONG!");
-        this.correctAnswer = "WRONG!";
-        this.nextStep();
-        // $("#" + answer).addClass("incorrect");
+        // this.correctAnswer = "WRONG!";
+        // this.nextStep();
+        $("#incorrectBtn").addClass("incorrect");
       }
 
       this.correctRatio = ((this.correct / this.total) * 100).toFixed(1)
     },
 
     nextStep () {
+      this.flag = true;
       // for (var item in this.activeChoices) {
       //   $("#" + this.activeChoices[item]).prop("disabled", true);
       // }
 
       let randomItem = getRandomItem(activeOptions);
+      // let theIndex =  romanNumeralsMinor((currentKeyNotes.indexOf(randomItem) + 1));
       // let randomOctave = getRandomItem([3]);
-      setTimeout(() => { this.correctAnswer = randomItem; correctAnswer = randomItem; this.flag = !this.flag}, 1500);
+      // setTimeout(() => { this.correctAnswer = randomItem; correctAnswer = randomItem; this.flag = !this.flag; this.resetChoices(); this.theIndex = theIndex; }, 3000);
+      setTimeout(() => { this.correctAnswer = randomItem; correctAnswer = randomItem; this.flag = !this.flag; this.resetChoices(); }, 3000);
       // // setTimeout(()=> { this.resetChoices(); }, 1400);
       // setTimeout(() => { this.playSound(); this.resetChoices(); }, 1500);
 
@@ -97,6 +116,8 @@ export default {
     },
 
     resetChoices() {
+      $("#correctBtn").removeClass("correct");
+      $("#incorrectBtn").removeClass("incorrect");
       // $('#pkey-' + this.noteBig).removeClass("correct");
       // // $('#pkey-' + this.noteBig).css("background", "transparent");
       // for (var item in this.activeChoices) {
@@ -114,6 +135,11 @@ export default {
     let initGameSettings = initializeGame('ChordTraining');
     this.activeChoices = initGameSettings[0];
     this.correctAnswer = initGameSettings[1];
+  },
+  filters: {
+    fixSharps: function (value) {
+      return value.replace("s", "#");
+    }
   }
 }
 </script>
