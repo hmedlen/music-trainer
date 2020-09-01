@@ -19,7 +19,7 @@ console.log("yip yip!");
 
 function playCorrectAnswer() {
 	var audio = new Audio('./wav/correct.mp3');
-	audio.volume = '0.2';
+	audio.volume = '0.02';
 	audio.play()
 }
 

@@ -35,7 +35,7 @@ function setActiveOptions(options) {
 }
 
 function initializeGame(description) {
-    setCurrentKey(5);
+    setCurrentKey(6);
     setCurrentMode("minor");
     gameType = description;
     // setActiveOptions();

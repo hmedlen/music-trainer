@@ -364,8 +364,17 @@ function getRandomItem(items) {
     return items[Math.floor(Math.random()*items.length)];
 }
 
+let lastAnswers = [];
+function processNewItem(items, lastAnswer) {
+    let temp = getRandomItem(items);
+    while (temp == correctAnswer) {
+        temp = getRandomItem(items);
+    }
+    return temp;
+}
+
 function initializeGame(description) {
-    setCurrentKey(5);
+    setCurrentKey(0);
     setCurrentMode("minor");
     gameType = description;
     // setActiveOptions();
@@ -377,7 +386,15 @@ function initializeGame(description) {
     console.log(currentKeyChords);
     if (description == "ChordTraining") {
         activeOptions = currentKeyChords;
-        activeOptions = ["C", "Cs", "D", "Ds", "E", "F", "Fs", "G", "Gs", "A", "As", "B", "Cmin", "Csmin", "Dmin", "Dsmin", "Emin", "Fmin", "Fsmin", "Gmin", "Gsmin", "Amin", "Asmin", "Bmin"];
+        let newOptions = [];
+        for (var i=0; i < activeOptions.length; i++) {
+            console.log(activeOptions[i]);
+            if (!activeOptions[i].includes('dim')) {
+                newOptions.push(activeOptions[i]);
+            }
+        }
+        activeOptions = newOptions;
+        // activeOptions = ["C", "Cs", "D", "Ds", "E", "F", "Fs", "G", "Gs", "A", "As", "B", "Cmin", "Csmin", "Dmin", "Dsmin", "Emin", "Fmin", "Fsmin", "Gmin", "Gsmin", "Amin", "Asmin", "Bmin"];
     }
 
 
@@ -413,6 +430,7 @@ function processAnswer(answer) {
     if (answer == correctAnswer) return true;
     else return false;
 }
+
 
 // SECTION: AUDIO
 
