@@ -6,8 +6,13 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '*',
-    redirect: 'trainer',
-    component: () => import('../components/Trainer/Index.vue')
+    redirect: 'register',
+    component: () => import('../components/Register.vue')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('../components/Register.vue')
   },
   {
     path: '/trainer',
